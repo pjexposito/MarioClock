@@ -1,0 +1,172 @@
+{
+    "appKeys": {
+        "KEY_DATEFORMAT": 2,
+        "KEY_HOURLYVIBE": 4,
+        "KEY_IDIOMA": 0,
+        "KEY_SEGUNDOS": 3,
+        "KEY_VIBE": 1
+    },
+    "capabilities": [
+        "configurable"
+    ],
+    "companyName": "Pedro",
+    "longName": "Super Mario Clock",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/icono.png",
+                "menuIcon": true,
+                "name": "IMAGE_ICONO",
+                "type": "png"
+            },
+            {
+                "file": "images/fondo.png",
+                "name": "IMAGE_BACKGROUND",
+                "type": "png"
+            },
+            {
+                "file": "images/icon_bluetooth.png",
+                "name": "IMAGE_BLUETOOTH",
+                "type": "png"
+            },
+            {
+                "file": "images/icon_meter.png",
+                "name": "IMAGE_METER_BAR",
+                "type": "png"
+            },
+            {
+                "file": "images/time_format_24H.png",
+                "name": "IMAGE_24_HOUR_MODE",
+                "type": "png"
+            },
+            {
+                "file": "images/time_format_PM.png",
+                "name": "IMAGE_PM_MODE",
+                "type": "png"
+            },
+            {
+                "file": "images/g0.png",
+                "name": "IMAGE_NUM_0",
+                "type": "png"
+            },
+            {
+                "file": "images/g1.png",
+                "name": "IMAGE_NUM_1",
+                "type": "png"
+            },
+            {
+                "file": "images/g2.png",
+                "name": "IMAGE_NUM_2",
+                "type": "png"
+            },
+            {
+                "file": "images/g3.png",
+                "name": "IMAGE_NUM_3",
+                "type": "png"
+            },
+            {
+                "file": "images/g4.png",
+                "name": "IMAGE_NUM_4",
+                "type": "png"
+            },
+            {
+                "file": "images/g5.png",
+                "name": "IMAGE_NUM_5",
+                "type": "png"
+            },
+            {
+                "file": "images/g6.png",
+                "name": "IMAGE_NUM_6",
+                "type": "png"
+            },
+            {
+                "file": "images/g7.png",
+                "name": "IMAGE_NUM_7",
+                "type": "png"
+            },
+            {
+                "file": "images/g8.png",
+                "name": "IMAGE_NUM_8",
+                "type": "png"
+            },
+            {
+                "file": "images/g9.png",
+                "name": "IMAGE_NUM_9",
+                "type": "png"
+            },
+            {
+                "file": "images/a0.png",
+                "name": "NUM_0",
+                "type": "png"
+            },
+            {
+                "file": "images/a1.png",
+                "name": "NUM_1",
+                "type": "png"
+            },
+            {
+                "file": "images/a2.png",
+                "name": "NUM_2",
+                "type": "png"
+            },
+            {
+                "file": "images/a3.png",
+                "name": "NUM_3",
+                "type": "png"
+            },
+            {
+                "file": "images/a4.png",
+                "name": "NUM_4",
+                "type": "png"
+            },
+            {
+                "file": "images/a5.png",
+                "name": "NUM_5",
+                "type": "png"
+            },
+            {
+                "file": "images/a6.png",
+                "name": "NUM_6",
+                "type": "png"
+            },
+            {
+                "file": "images/a7.png",
+                "name": "NUM_7",
+                "type": "png"
+            },
+            {
+                "file": "images/a8.png",
+                "name": "NUM_8",
+                "type": "png"
+            },
+            {
+                "file": "images/a9.png",
+                "name": "NUM_9",
+                "type": "png"
+            },
+            {
+                "file": "images/bateriacargando.png",
+                "name": "IMAGE_BATTERY_CHARGE",
+                "type": "png"
+            },
+            {
+                "file": "images/bateria.png",
+                "name": "IMAGE_BATTERY",
+                "type": "png"
+            },
+            {
+                "file": "images/tiny_percent.png",
+                "name": "IMAGE_TINY_PERCENT",
+                "type": "png"
+            }
+        ]
+    },
+    "shortName": "Super Mario Clock",
+    "uuid": "31b6202e-c857-46e2-84b3-07ae284cbd53",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
