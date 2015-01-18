@@ -1,18 +1,11 @@
-// Gráficos de los iconos adaptados de http://icons.primail.ch/index.php?page=iconset_weather
-// Código del tiempo adaptado de https://github.com/Niknam/futura-weather-sdk2.0.
-// Lo anteriormente mencionado ya no se usa en esta version
 // Código del reloj basado en https://github.com/orviwan/91-Dub-v2.0
 // Con código de https://ninedof.wordpress.com/2014/05/24/pebble-sdk-2-0-tutorial-9-app-configuration/
 
-
-// UUID para versión en español: "11d1527e-985b-4844-bc10-34ede0ee9caf"
-// UUID para versión en inglés:  "a8336799-b197-4e3d-8afd-3290317c65b2"
 
 
 
 #include "pebble.h"
   
-#define KEY_IDIOMA 0
 #define KEY_VIBE 1
 #define KEY_DATEFORMAT 2
 #define KEY_SEGUNDOS 3
@@ -22,10 +15,6 @@ static Window *window;
 static Layer *window_layer;
 static uint8_t batteryPercent;
 
-
-int IDIOMA;  
-// IDIOMA = 1, texto en español
-// IDIOMA = 0, text in english  
   
 bool DATEFORMAT;
 // DATEFORMAT = 1, Formato europeo (DD/MM/AAAA)
@@ -113,7 +102,6 @@ static BitmapLayer *battery_percent_layers[TOTAL_BATTERY_PERCENT_DIGITS];
 static void carga_preferencias(void)
   { 
     // Carga las preferencias
-    IDIOMA = persist_exists(KEY_IDIOMA) ? persist_read_int(KEY_IDIOMA) : 0;
     DATEFORMAT = persist_exists(KEY_DATEFORMAT) ? persist_read_bool(KEY_DATEFORMAT) : 1;
     BluetoothVibe = persist_exists(KEY_VIBE) ? persist_read_int(KEY_VIBE) : 1;
     SEGUNDOS = persist_exists(KEY_SEGUNDOS) ? persist_read_int(KEY_SEGUNDOS) : 1;
@@ -123,19 +111,28 @@ static void carga_preferencias(void)
 static void handle_tick(struct tm *tick_time, TimeUnits units_changed);
 
 
+static void set_container_image(GBitmap **bmp_image, BitmapLayer *bmp_layer, const int resource_id, GPoint origin) {
+  GBitmap *old_image = *bmp_image;
+  *bmp_image = gbitmap_create_with_resource(resource_id);
+  GRect frame = (GRect) {
+    .origin = origin,
+    .size = (*bmp_image)->bounds.size
+  };
+  bitmap_layer_set_bitmap(bmp_layer, *bmp_image);
+  layer_set_frame(bitmap_layer_get_layer(bmp_layer), frame);
+  if (old_image != NULL) {
+	  gbitmap_destroy(old_image);
+	old_image = NULL;
+  }
+}
+
 static void in_recv_handler(DictionaryIterator *iterator, void *context)
   {
   //Recibe los datos de configuración
-  Tuple *key_idioma_tuple = dict_find(iterator, KEY_IDIOMA);
   Tuple *key_vibe_tuple = dict_find(iterator, KEY_VIBE);
   Tuple *key_dateformat_tuple = dict_find(iterator, KEY_DATEFORMAT);
   Tuple *key_segundos_tuple = dict_find(iterator, KEY_SEGUNDOS);
   Tuple *key_hourlyvibe_tuple = dict_find(iterator, KEY_HOURLYVIBE);
-
-  if(strcmp(key_idioma_tuple->value->cstring, "spanish") == 0)
-    persist_write_int(KEY_IDIOMA, 1);
-  else if(strcmp(key_idioma_tuple->value->cstring, "english") == 0)
-    persist_write_int(KEY_IDIOMA, 0);
  
   if(strcmp(key_dateformat_tuple->value->cstring, "DDMM") == 0)
       persist_write_bool(KEY_DATEFORMAT, 1);
@@ -168,9 +165,12 @@ static void in_recv_handler(DictionaryIterator *iterator, void *context)
   }
   else
   {
-    layer_set_hidden(bitmap_layer_get_layer(seg_digits_layers[0]), true);
-    layer_set_hidden(bitmap_layer_get_layer(seg_digits_layers[1]), true);    
     tick_timer_service_subscribe(MINUTE_UNIT, handle_tick);
+    layer_set_hidden(bitmap_layer_get_layer(seg_digits_layers[0]), false);
+    layer_set_hidden(bitmap_layer_get_layer(seg_digits_layers[1]), false); 
+    set_container_image(&seg_digits_images[0], seg_digits_layers[0],DIGIT_IMAGE_RESOURCE_IDS[9], GPoint(77, 22));
+    set_container_image(&seg_digits_images[1], seg_digits_layers[1],DIGIT_IMAGE_RESOURCE_IDS[9], GPoint(84, 22));
+
   }
   time_t now = time(NULL);
   struct tm *tick_time = localtime(&now);  
@@ -191,21 +191,6 @@ void change_battery_icon(bool charging) {
   layer_mark_dirty(bitmap_layer_get_layer(battery_image_layer));
 }
 
-
-static void set_container_image(GBitmap **bmp_image, BitmapLayer *bmp_layer, const int resource_id, GPoint origin) {
-  GBitmap *old_image = *bmp_image;
-  *bmp_image = gbitmap_create_with_resource(resource_id);
-  GRect frame = (GRect) {
-    .origin = origin,
-    .size = (*bmp_image)->bounds.size
-  };
-  bitmap_layer_set_bitmap(bmp_layer, *bmp_image);
-  layer_set_frame(bitmap_layer_get_layer(bmp_layer), frame);
-  if (old_image != NULL) {
-	  gbitmap_destroy(old_image);
-	old_image = NULL;
-  }
-}
 
 
 static void update_battery(BatteryChargeState charge_state) {

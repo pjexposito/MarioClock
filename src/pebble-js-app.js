@@ -9,7 +9,7 @@ Pebble.addEventListener("ready",
 Pebble.addEventListener("showConfiguration",
   function(e) {
     //Carga la web de configuración
-    Pebble.openURL("https://dl.dropboxusercontent.com/u/119376/config.html");
+    Pebble.openURL("https://dl.dropboxusercontent.com/u/119376/configsmb.html");
   }
 );
 
@@ -20,8 +20,7 @@ Pebble.addEventListener("webviewclosed",
  
     //Send to Pebble, persist there
     Pebble.sendAppMessage(
-      {"KEY_IDIOMA": configuration.idioma,
-       "KEY_VIBE": configuration.vibe,
+      {"KEY_VIBE": configuration.vibe,
        "KEY_DATEFORMAT": configuration.dateformat,
        "KEY_SEGUNDOS": configuration.segundos,
        "KEY_HOURLYVIBE": configuration.hourlyvibe
