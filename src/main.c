@@ -290,7 +290,7 @@ static void update_hours(struct tm *tick_time) {
   
   unsigned short display_hour = get_display_hour(tick_time->tm_hour);
 
-  set_container_image(&time_digits_images[0], time_digits_layers[0], MURO_DIGIT_IMAGE_RESOURCE_IDS[display_hour/10], GPoint(84, 70));
+  set_container_image(&time_digits_images[0], time_digits_layers[0], MURO_DIGIT_IMAGE_RESOURCE_IDS[display_hour/10], GPoint(80, 70));
   set_container_image(&time_digits_images[1], time_digits_layers[1], MURO_DIGIT_IMAGE_RESOURCE_IDS[display_hour%10], GPoint(115, 70));
 
   if (!clock_is_24h_style()) {
@@ -313,7 +313,7 @@ static void update_hours(struct tm *tick_time) {
 }
 
 static void update_minutes(struct tm *tick_time) {
-  set_container_image(&time_digits_images[2], time_digits_layers[2], MURO_DIGIT_IMAGE_RESOURCE_IDS[tick_time->tm_min/10], GPoint(84, 115));
+  set_container_image(&time_digits_images[2], time_digits_layers[2], MURO_DIGIT_IMAGE_RESOURCE_IDS[tick_time->tm_min/10], GPoint(80, 115));
   set_container_image(&time_digits_images[3], time_digits_layers[3], MURO_DIGIT_IMAGE_RESOURCE_IDS[tick_time->tm_min%10], GPoint(115, 115));
 }
 
